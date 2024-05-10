@@ -28,6 +28,14 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
+
+    // Use the JDBC driver
+    implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
+
+    // Use Jypthon
+    implementation 'org.python:jython-slim:2.7.3'
+
+
 }
 
 application {

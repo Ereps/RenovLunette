@@ -29,7 +29,7 @@ public class SellController implements Initializable{
     @FXML
     TextField priceTextField;
     @FXML
-    TextField contacTextField;
+    TextField contactTextField;
     @FXML
     TextField ribTextField;
     @FXML
