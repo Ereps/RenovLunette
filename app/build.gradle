@@ -32,8 +32,8 @@ dependencies {
     // Use the JDBC driver
     implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
 
-    // Use Gson
-    implementation 'com.google.code.gson:gson:2.8.8'
+    // Use Json
+    implementation 'org.json:json:20210307'
 
 
 }

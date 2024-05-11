@@ -19,8 +19,8 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
-import com.google.gson.Gson;
-
+import org.json.JSONObject;
+import org.json.JSONArray;
 public class DB {
     
     private URI uri;
@@ -28,58 +28,41 @@ public class DB {
     private Connection connection;
 
     public DB() {
-        /*
-        String jsonPayload = """
-                {
-                    "requests": [
-                        { "type": "execute", "stmt": { "sql": "SELECT * FROM users" } },
-                        { "type": "close" }
-                    ]
         
-                }
-                """;
-
-        // Create the HTTP client
-        HttpClient client = HttpClient.newHttpClient();
-
-        // Create the HTTP request
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("Authorization", "Bearer " + token)
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
-                .build();
-
-        // Send the HTTP request and handle the response
         try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            int statusCode = response.statusCode();
-            String responseBody = response.body();
-            
-            // Print the response
-            System.out.println("Status Code: " + statusCode);
-            System.out.println("Response Body: " + responseBody);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
-        try {
-            String request = "{\"requests\": ["+"{ \"type\": \"execute\", \"stmt\": { \"sql\": \"SELECT * FROM items\" } }, { \"type\": \"close\" } ]}";
+            String request = query("SELECT * FROM items");
             uri = new URI("https://renovlunette-project-ereps.turso.io/v2/pipeline");
             HttpRequest getRequest = HttpRequest.newBuilder().uri(uri).header("Authorization", "Bearer " + token)
-                                     .POST(BodyPublishers.ofString(request)).build();
+                                         .POST(BodyPublishers.ofString(request)).build();
             HttpClient client = HttpClient.newHttpClient();
             HttpResponse<String> response = client.send(getRequest, BodyHandlers.ofString());
-            System.out.println("RESOIIBRD "+response.body());
+            System.out.println("RESOIIBRD "+response.body()); 
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
+        /*JSONArray argsArray = new JSONArray();
+        JSONObject jo = new JSONObject();
+        jo.put("type", "execute");
+        jo.put("stmt", new JSONObject().put("sql", query));
+
+        jsonArray = new JSONArray(new JSONObject().put("type","integer").put("value","1"));
+        query("SELECT * FROM items",new JSONObject().put("args",jsonArray));*/
     }
 
     
     public Connection getConnection() {
         return connection;
+    }
+
+    public String query(String query){
+        JSONObject jo = new JSONObject();
+        JSONArray ja = new JSONArray();
+        ja.put(new JSONObject().put("type", "execute").put("stmt", new JSONObject().put("sql", query)));
+        ja.put(new JSONObject().put("type", "close"));
+        jo.put("requests", ja);
+        return jo.toString();
     }
 
     public void closeConnection() {
