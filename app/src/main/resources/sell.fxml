@@ -46,12 +46,12 @@
                   <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField fx:id="contactTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <TextField fx:id="ribTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Button fx:id="returnButton" mnemonicParsing="false" text="Retour" GridPane.rowIndex="7">
+                  <Button fx:id="returnButton" mnemonicParsing="false" text="Retour" GridPane.rowIndex="7" onAction="#goToMenu">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="validationButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Validation" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                  <Button fx:id="validationButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Validation" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" onAction="#validate">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>

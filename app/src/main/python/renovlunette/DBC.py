@@ -12,10 +12,12 @@ token = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTUzNzgwOTEsImlkIjoiZG
 
 
 def connexion(url,token):
-    print(F"connecting to {url}")
+    print("connecting to ",url)
     conn = libsql.connect(url,
                         auth_token=token)
     conn.execute("CREATE TABLE IF NOT EXISTS  items (id INT PRIMARY KEY,image BLOB,description TEXT,qualitity INT, price REAL unsigned ,contact TEXT, rib TEXT);")
     conn.commit()
+def test():
+    print("test")
 if __name__ == "__main__":
     connexion(url,token)

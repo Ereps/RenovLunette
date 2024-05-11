@@ -35,6 +35,9 @@ dependencies {
     // Use Jypthon
     implementation 'org.python:jython-slim:2.7.3'
 
+    // Use Gson
+    implementation 'com.google.code.gson:gson:2.8.8'
+
 
 }
 

@@ -68,6 +68,15 @@ public class SellController implements Initializable{
         scene.setRoot(root);
         //TODO : save the item in the database
         //TODO : vérifier la validité des infos
+        String description = descriptionTextArea.getText();
+        String color = colorCB.getValue();
+        String size = sizeCB.getValue();
+        String qualityState = qualityStateCB.getValue();
+        String price = priceTextField.getText();
+        String contact = contactTextField.getText();
+        String rib = ribTextField.getText();
+        DB db = new DB();
+        db.saveItem(description, color, size, qualityState, price, contact, rib);
 
     }
     
