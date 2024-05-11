@@ -29,8 +29,6 @@ public class DB {
 
     public DB() {
         createItemsTable();
- 
-        
     }
 
     
@@ -39,7 +37,6 @@ public class DB {
     }
 
     public void createItemsTable(){
-        query("DROP TABLE items");
         query("CREATE TABLE IF NOT EXISTS items (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,image BLOB, description VARCHAR(255), color VARCHAR(255), size VARCHAR(255), qualityState VARCHAR(255), price VARCHAR(255), contact VARCHAR(255), rib VARCHAR(255))");
     }
 
