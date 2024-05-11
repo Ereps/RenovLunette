@@ -1,5 +1,6 @@
 package renovlunette;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,6 +17,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 
 public class SellController implements Initializable{
     @FXML
@@ -36,6 +38,14 @@ public class SellController implements Initializable{
     Button returnButton;
     @FXML
     Button validationButton;
+    @FXML
+    Button img1Button;
+    @FXML
+    Button img2Button;
+    @FXML
+    Button img3Button;
+    @FXML
+    Button newImgButton;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,5 +89,16 @@ public class SellController implements Initializable{
         db.saveItem(description, color, size, qualityState, price, contact, rib);
 
     }
-    
+    @FXML
+    public void selectImageFile(ActionEvent actionEvent) throws Exception{
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une image");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(((Node) actionEvent.getSource()).getScene().getWindow());
+        System.out.println(selectedFile.getName());
+    }
+    @FXML
+    public void deleteImage(ActionEvent actionEvent1) throws Exception{
+        //TODO : delete the image
+    }
 }
