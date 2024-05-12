@@ -65,32 +65,20 @@
                      <children>
                         <Button fx:id="img1Button" mnemonicParsing="false" onAction="#deleteImage" prefHeight="30.0" prefWidth="30.0">
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@download.jpeg" />
-                                 </image>
-                              </ImageView>
+                              <ImageView fx:id="img1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
                         </Button>
                         <Button fx:id="img2Button" mnemonicParsing="false" onAction="#deleteImage" prefHeight="30.0" prefWidth="30.0">
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@download.jpeg" />
-                                 </image>
-                              </ImageView>
+                              <ImageView fx:id="img2" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
                         </Button>
                         <Button fx:id="img3Button" mnemonicParsing="false" onAction="#deleteImage" prefHeight="30.0" prefWidth="30.0">
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@download.jpeg" />
-                                 </image>
-                              </ImageView>
+                              <ImageView fx:id="img3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
                         </Button>
-                        <Button fx:id="newImageButton" mnemonicParsing="false" onAction="#selectImageFile" prefHeight="30.0" prefWidth="30.0" text="Ajouter">
+                        <Button fx:id="newImgButton" mnemonicParsing="false" onAction="#selectImageFile" prefHeight="30.0" prefWidth="30.0" text="Ajouter">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

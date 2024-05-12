@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
@@ -46,7 +47,14 @@ public class SellController implements Initializable{
     Button img3Button;
     @FXML
     Button newImgButton;
-    
+    @FXML
+    ImageView img1;
+    @FXML
+    ImageView img2;
+    @FXML
+    ImageView img3;
+    //TODO mettre les button en non visible et les afficher juste quand une image est mise
+    //TODO redimensionner les images pour qu'elles soient toutes de la même taille
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colorCB.getItems().addAll("Rouge", "Bleu", "Vert", "Jaune");
@@ -65,6 +73,7 @@ public class SellController implements Initializable{
     }
     @FXML
     public void goToMenu(ActionEvent actionEvent) throws Exception{
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
         Pane root = (Pane) loader.load();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
@@ -76,7 +85,6 @@ public class SellController implements Initializable{
         Pane root = (Pane) loader.load();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
         scene.setRoot(root);
-        //TODO : save the item in the database
         //TODO : vérifier la validité des infos
         String description = descriptionTextArea.getText();
         String color = colorCB.getValue();
@@ -95,10 +103,22 @@ public class SellController implements Initializable{
         fileChooser.setTitle("Choisir une image");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(((Node) actionEvent.getSource()).getScene().getWindow());
-        System.out.println(selectedFile.getName());
+        if(selectedFile != null){
+            if(img1.getImage() == null){
+                img1.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
+            }
+            else if(img2.getImage() == null){
+                img2.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
+            }
+            else{
+                img3.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
+            }
+        }
+
     }
     @FXML
     public void deleteImage(ActionEvent actionEvent1) throws Exception{
         //TODO : delete the image
+        //TODO : si on delete l'image 1, alors l'image 2 devient l'image 1 etc
     }
 }

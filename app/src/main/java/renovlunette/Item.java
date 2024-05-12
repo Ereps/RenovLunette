@@ -1,16 +1,18 @@
 package renovlunette;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 
 public class Item {
     private String description;
     private double price;
-    private Image image;
+    private ArrayList<Image> images;
 
-    public Item(String description, double price, Image image) {
+    public Item(String description, double price, ArrayList<Image> images, String color, String size, String qualityState, String contact, String rib) {
         this.description = description;
         this.price = price;
-        this.image = image;
+        this.images = images;
     }
 
     public String getDescription() {
@@ -29,11 +31,11 @@ public class Item {
         this.price = price;
     }
 
-    public Image getImage() {
-        return image;
+    public ArrayList<Image> getImages() {
+        return images;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImages(ArrayList<Image> images) {
+        this.images = images;
     }
 }
