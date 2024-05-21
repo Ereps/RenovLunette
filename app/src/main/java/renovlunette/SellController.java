@@ -119,6 +119,6 @@ public class SellController implements Initializable{
     @FXML
     public void deleteImage(ActionEvent actionEvent1) throws Exception{
         //TODO : delete the image
-        //TODO : si on delete l'image 1, alors l'image 2 devient l'image 1 etc
+        //TODO : si on delete l'image 1, alors l'image 2 devient l'image 1 etc...
     }
 }
