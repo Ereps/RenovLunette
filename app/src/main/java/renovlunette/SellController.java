@@ -88,7 +88,6 @@ public class SellController implements Initializable{
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
         Pane root = (Pane) loader.load();
-        MenuController menuController = loader.getController();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
         scene.setRoot(root);
     }
@@ -99,8 +98,6 @@ public class SellController implements Initializable{
             return;
         };
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
-        MenuController menuController = loader.getController();
-        menuController.initialize(null, null);
         Pane root = (Pane) loader.load();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
         scene.setRoot(root);
