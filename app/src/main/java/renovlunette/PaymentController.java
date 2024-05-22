@@ -66,8 +66,6 @@ public class PaymentController {
     public void goToMenu(ActionEvent actionEvent) throws Exception{
         mainGridPane.setDisable(false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
-        DB db = new DB();
-        db.query("DELETE FROM item WHERE id = "+id);
         //REFAIRE L'initialisation de la page
         Pane root = (Pane) loader.load();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
@@ -111,7 +109,8 @@ public class PaymentController {
     private void onOuiButton() {
         confirmationPane.setVisible(false);
         effectuePane.setVisible(true);
-
+        DB db = new DB();
+        db.query("DELETE FROM items WHERE id = "+id);
 
     }
 
