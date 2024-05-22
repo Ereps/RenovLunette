@@ -30,7 +30,7 @@ public class MenuController implements Initializable {
     private GridPane mainGridPane;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        /*
         itemsViewList = new ListView<HBox>();
         
         DB db = new DB();
@@ -52,6 +52,7 @@ public class MenuController implements Initializable {
         mainGridPane.add(itemsViewList,0,2);
         GridPane.setRowSpan(itemsViewList, GridPane.REMAINING);
         GridPane.setColumnSpan(itemsViewList, GridPane.REMAINING);
+        */
     }
     
     @FXML

@@ -29,7 +29,6 @@ public class DB {
     
     private URI uri;
     private String token = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTUzNzgwOTEsImlkIjoiZGRjZTJkOGQtY2VmOC00MTdmLThhY2YtNmJhMWNjY2I1ZjhiIn0.o_qmZwR-OhPoK4Zp6XRMdG9Ueeiw_axrNEmwJ2fWD5XNeVfr8S5_J5acHsLQI0GuoiYnzYl39kNMDHZSgW57Dg";
-    private Connection connection;
     //offset pour les query sur la page menu
     private static int offset = 0;
     //TODO faire un compte avec une autre table pour les utilisateurs en mode quand y'a une vente pour le rib x et bah on update la table
@@ -39,7 +38,9 @@ public class DB {
 
     public void createItemsTable(){
         query("CREATE TABLE IF NOT EXISTS items (id INTEGER"+
-                                                ",image BLOB,"+ 
+                                                ",image1 BLOB"+
+                                                ",image2 BLOB"+ 
+                                                ",image3 BLOB,"+ 
                                                 "description VARCHAR(255),"+
                                                 "color VARCHAR(255) NOT NULL,"+
                                                 "size VARCHAR(255) NOT NULL,"+
@@ -97,12 +98,12 @@ public class DB {
         JSONObject result = response.getJSONObject("result");
         JSONArray rows = result.getJSONArray("rows");
         ArrayList<Item> items = new ArrayList<>();
-        
+        System.out.println("eifeif"+rows);
         for(int i = 0; i < rows.length(); i++){
             JSONArray row = rows.getJSONArray(i);
             int id = Integer.parseInt(getValueFromJson(row.getJSONObject(0)));
             //TODO utiliser les blob pour reprendre les images index 1 dans la db
-            ArrayList<Image> images = new ArrayList<>();
+            ArrayList<Image> images = new ArrayList<>(); //TODO mettre les images
             String description = getValueFromJson(row.getJSONObject(2));
             String color = getValueFromJson(row.getJSONObject(3));
             String size = getValueFromJson(row.getJSONObject(4));
@@ -121,7 +122,6 @@ public class DB {
             //TODO changer null en les images
             //items.add(new Item(item.getString("description"), item.getDouble("price"), null, item.getString("color"), item.getString("size"), item.getString("qualityState"), item.getString("contact"), item.getString("rib")));
         }
-        System.out.println(items.toString());
         return items;
     }
 
