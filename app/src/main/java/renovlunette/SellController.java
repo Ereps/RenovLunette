@@ -200,29 +200,4 @@ public class SellController implements Initializable{
         alert.showAndWait();
     }
 
-    //fonction pour lock les champs de la fenêtre
-    @FXML
-    public void lockAll() {
-        colorCB.setDisable(true);
-        sizeCB.setDisable(true);
-        qualityStateCB.setDisable(true);
-        priceTextField.setDisable(true);
-        contactTextField.setDisable(true);
-        ribTextField.setDisable(true);
-        returnButton.setDisable(true);
-        validationButton.setDisable(true);
-    }
-
-    //fonction pour delock les champs de la fenêtre
-    @FXML
-    public void unlockAll() {
-        colorCB.setDisable(false);
-        sizeCB.setDisable(false);
-        qualityStateCB.setDisable(false);
-        priceTextField.setDisable(false);
-        contactTextField.setDisable(false);
-        ribTextField.setDisable(false);
-        returnButton.setDisable(false);
-        validationButton.setDisable(false);
-    }
 }
