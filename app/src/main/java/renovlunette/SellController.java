@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -86,9 +87,8 @@ public class SellController implements Initializable{
     public void goToMenu(ActionEvent actionEvent) throws Exception{
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
-
-        //REFAIRE L'initialisation de la page
         Pane root = (Pane) loader.load();
+        MenuController menuController = loader.getController();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
         scene.setRoot(root);
     }
@@ -99,6 +99,8 @@ public class SellController implements Initializable{
             return;
         };
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
+        MenuController menuController = loader.getController();
+        menuController.initialize(null, null);
         Pane root = (Pane) loader.load();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
         scene.setRoot(root);
