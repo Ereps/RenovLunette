@@ -9,12 +9,23 @@ public class Item {
         private String description;
     private double price;
     private ArrayList<Image> images;
+    private String color;
+    private String size;
+    private String qualityState;
+    private String contact;
+    private String rib;
 
     public Item(int id ,String description, double price, ArrayList<Image> images, String color, String size, String qualityState, String contact, String rib) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.images = images;
+        this.color = color;
+        this.size = size;
+        this.qualityState = qualityState;
+        this.contact = contact;
+        this.rib = rib;
+
     }
 
     public int getId() {
@@ -42,5 +53,20 @@ public class Item {
 
     public void setImages(ArrayList<Image> images) {
         this.images = images;
+    }
+    public String getColor() {
+        return color;
+    }
+    public String getContact() {
+        return contact;
+    }
+    public String getQualityState() {
+        return qualityState;
+    }
+    public String getRib() {
+        return rib;
+    }
+    public String getSize() {
+        return size;
     }
 }
