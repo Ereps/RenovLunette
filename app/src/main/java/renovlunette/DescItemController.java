@@ -33,6 +33,7 @@ import javafx.scene.control.Alert.AlertType;
 
 
 public class DescItemController implements Initializable{
+    private int id;
     @FXML
     Text descriptionText;
     @FXML
@@ -67,6 +68,7 @@ public class DescItemController implements Initializable{
         
     }
     public void initData(int id){
+        this.id = id;
         DB db = new DB();
         Item item = db.getItem(id);
         descriptionText.setText(item.getDescription());
@@ -120,6 +122,8 @@ public class DescItemController implements Initializable{
     public void buy(ActionEvent actionEvent) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/payment.fxml"));
         Pane root = (Pane) loader.load();
+        PaymentController paymentController = loader.getController();
+        paymentController.setId(id);
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
         scene.setRoot(root);
     }

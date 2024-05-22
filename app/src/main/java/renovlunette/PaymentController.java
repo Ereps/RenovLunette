@@ -19,7 +19,8 @@ import javafx.scene.control.Button;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 
-public class paymentController {
+public class PaymentController {
+    private int id;
     @FXML
     TextField mailTextField;
     @FXML
@@ -56,13 +57,17 @@ public class paymentController {
             sourceTextField.setText(input.replaceAll("[^\\d]", ""));
         }
     }
+    public void setId(int id){
+        this.id = id;
+    }
 
     //on returnButton / okButton
     @FXML
     public void goToMenu(ActionEvent actionEvent) throws Exception{
         mainGridPane.setDisable(false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
-
+        DB db = new DB();
+        db.query("DELETE FROM item WHERE id = "+id);
         //REFAIRE L'initialisation de la page
         Pane root = (Pane) loader.load();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
@@ -106,6 +111,8 @@ public class paymentController {
     private void onOuiButton() {
         confirmationPane.setVisible(false);
         effectuePane.setVisible(true);
+
+
     }
 
 }

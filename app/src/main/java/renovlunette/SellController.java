@@ -152,18 +152,23 @@ public class SellController implements Initializable{
         }
 
     }
-    @FXML
-    public void deleteImage(ActionEvent actionEvent1) throws Exception{
-        //TODO : delete the image
-        //TODO : si on delete l'image 1, alors l'image 2 devient l'image 1 etc...
-    }
+
     public byte[] imageToByteArray(Image image) throws IOException {
             // Convert JavaFX Image to BufferedImage
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
 
             // Write BufferedImage to ByteArrayOutputStream
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "jpg", byteArrayOutputStream); // "jpg" can be replaced with the appropriate format
+            if(image.getUrl().endsWith(".png"))
+                ImageIO.write(bufferedImage, "png", byteArrayOutputStream); // "jpg" can be replaced with the appropriate format
+            else if(image.getUrl().endsWith(".jpg") || image.getUrl().endsWith(".jpeg")){
+                ImageIO.write(bufferedImage, "jpg", byteArrayOutputStream); // "jpg" can be replaced with the appropriate format
+
+            }
+            else if(image.getUrl().endsWith(".gif"))
+                ImageIO.write(bufferedImage, "gif", byteArrayOutputStream); // "jpg" can be replaced with the appropriate format
+            else
+                ImageIO.write(bufferedImage, "jpg", byteArrayOutputStream); // "jpg" can be replaced with the appropriate format
             byteArrayOutputStream.flush();
 
             // Convert ByteArrayOutputStream to byte array

@@ -63,17 +63,17 @@
                   <Label text="Images" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Button fx:id="img1Button" mnemonicParsing="false" onAction="#deleteImage" prefHeight="30.0" prefWidth="30.0">
+                        <Button fx:id="img1Button" mnemonicParsing="false"  prefHeight="30.0" prefWidth="30.0">
                            <graphic>
                               <ImageView fx:id="img1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
                         </Button>
-                        <Button fx:id="img2Button" mnemonicParsing="false" onAction="#deleteImage" prefHeight="30.0" prefWidth="30.0">
+                        <Button fx:id="img2Button" mnemonicParsing="false"  prefHeight="30.0" prefWidth="30.0">
                            <graphic>
                               <ImageView fx:id="img2" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
                         </Button>
-                        <Button fx:id="img3Button" mnemonicParsing="false" onAction="#deleteImage" prefHeight="30.0" prefWidth="30.0">
+                        <Button fx:id="img3Button" mnemonicParsing="false"  prefHeight="30.0" prefWidth="30.0">
                            <graphic>
                               <ImageView fx:id="img3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
