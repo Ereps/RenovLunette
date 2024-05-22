@@ -1,16 +1,12 @@
 package renovlunette;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.sql.Blob;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
-import javax.sql.rowset.serial.SerialBlob;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -26,12 +22,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelFormat;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.embed.swing.SwingFXUtils;
-import java.io.ByteArrayOutputStream;
-import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImage;
 
 import javafx.scene.control.Alert;

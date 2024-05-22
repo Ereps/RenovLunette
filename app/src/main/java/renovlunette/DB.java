@@ -68,7 +68,6 @@ public class DB {
                                         .POST(BodyPublishers.ofString(request)).build();
             HttpClient client = HttpClient.newHttpClient();
             response = client.send(getRequest, BodyHandlers.ofString());
-            System.out.println("RESOIIBRD "+response.body());
              
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -103,17 +102,14 @@ public class DB {
         JSONObject result = response.getJSONObject("result");
         JSONArray rows = result.getJSONArray("rows");
         ArrayList<Item> items = new ArrayList<>();
-        System.out.println("eifeif"+rows);
         for(int i = 0; i < rows.length(); i++){
             JSONArray row = rows.getJSONArray(i);
             int id = Integer.parseInt(getValueFromJson(row.getJSONObject(0)));
-            //TODO utiliser les blob pour reprendre les images index 1 dans la db
 
-            ArrayList<Image> images = new ArrayList<>(); //TODO mettre les images get 1 à 3
-            System.err.println("image1 : "+getValueFromJson(row.getJSONObject(1)));
+            ArrayList<Image> images = new ArrayList<>();
             images.add(getImageFromByte(decodeImage(getValueFromJson(row.getJSONObject(1)))));
-            images.add(getImageFromByte(getValueFromJson(row.getJSONObject(2)).getBytes()));
-            images.add(getImageFromByte(getValueFromJson(row.getJSONObject(3)).getBytes()));
+            images.add(getImageFromByte(decodeImage(getValueFromJson(row.getJSONObject(2)))));
+            images.add(getImageFromByte(decodeImage(getValueFromJson(row.getJSONObject(3)))));
             
             String description = getValueFromJson(row.getJSONObject(4));
             String color = getValueFromJson(row.getJSONObject(5));
@@ -126,6 +122,32 @@ public class DB {
             items.add(new Item(id,description, price, images, color, size, qualityState, contact, rib));
         }
         return items;
+    }
+    public Item getItem(int _id){
+        String resultString = query("SELECT * FROM items WHERE id =  "+_id);
+        JSONObject jo = new JSONObject(resultString);
+        JSONArray ja = jo.getJSONArray("results");
+        JSONObject response = ja.getJSONObject(0).getJSONObject("response");
+        JSONObject result = response.getJSONObject("result");
+        JSONArray rows = result.getJSONArray("rows");
+            JSONArray row = rows.getJSONArray(0);
+            int id = Integer.parseInt(getValueFromJson(row.getJSONObject(0)));
+
+            ArrayList<Image> images = new ArrayList<>();
+            images.add(getImageFromByte(decodeImage(getValueFromJson(row.getJSONObject(1)))));
+            images.add(getImageFromByte(decodeImage(getValueFromJson(row.getJSONObject(2)))));
+            images.add(getImageFromByte(decodeImage(getValueFromJson(row.getJSONObject(3)))));
+            
+            String description = getValueFromJson(row.getJSONObject(4));
+            String color = getValueFromJson(row.getJSONObject(5));
+            String size = getValueFromJson(row.getJSONObject(6));
+            String qualityState = getValueFromJson(row.getJSONObject(7));
+            double price = Double.parseDouble(getValueFromJson(row.getJSONObject(8)));
+            String contact = getValueFromJson(row.getJSONObject(9));
+            String rib = getValueFromJson(row.getJSONObject(10));
+
+            Item item = new Item(id,description, price, images, color, size, qualityState, contact, rib);
+        return item;
     }
     private Image getImageFromByte(byte[] image) {
         InputStream is = new ByteArrayInputStream(image);
