@@ -118,7 +118,10 @@ public class DescItemController implements Initializable{
 
     @FXML
     public void buy(ActionEvent actionEvent) throws Exception{
-        //TODO
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/payment.fxml"));
+        Pane root = (Pane) loader.load();
+        Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
+        scene.setRoot(root);
     }
 
 
