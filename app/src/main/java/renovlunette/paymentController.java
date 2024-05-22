@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -33,6 +34,18 @@ public class paymentController {
     Button returnButton;
     @FXML
     Button validationButton;
+    @FXML
+    Pane confirmationPane;
+    @FXML
+    Button ouiButton;
+    @FXML
+    Button nonButton;
+    @FXML
+    Pane effectuePane;
+    @FXML
+    Button okButton;
+    @FXML
+    GridPane mainGridPane;
 
     //vérifie qu'un Text Field ne contient que des chiffres
     @FXML
@@ -44,7 +57,7 @@ public class paymentController {
         }
     }
 
-    //on returnButton
+    //on returnButton / okButton
     @FXML
     public void goToMenu(ActionEvent actionEvent) throws Exception{
         
@@ -72,8 +85,27 @@ public class paymentController {
         alert.showAndWait();
     }
     
-
-
     //on validationButton
+    @FXML 
+    private void onValidationButton() {
+        if (checkFields()==true){
+            showErrorAlert("Champ non rempli");
+            return;
+        }
+        mainGridPane.setDisable(true);
+        confirmationPane.setVisible(true);
+    }
+
+    @FXML
+    private void onNonButton() {
+        confirmationPane.setVisible(false);
+        mainGridPane.setDisable(false);
+    }
+
+    @FXML
+    private void onOuiButton() {
+        confirmationPane.setVisible(false);
+        effectuePane.setVisible(true);
+    }
 
 }
