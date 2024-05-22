@@ -30,7 +30,7 @@ public class MenuController implements Initializable {
     private GridPane mainGridPane;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*
+
         itemsViewList = new ListView<HBox>();
         
         DB db = new DB();
@@ -38,11 +38,11 @@ public class MenuController implements Initializable {
         System.out.println(items);
         for (Item item : items) {
             HBox itemBox = new HBox();
-            ImageView imageView = new ImageView();
+            System.out.println();
+            ImageView imageView = new ImageView(item.getImages().get(0));//item.getImages().get(0));
+            imageView.setFitHeight(30);
+            imageView.setFitWidth(30);
             Label label = new Label(item.getDescription());
-            System.out.println("labellllll + " + item.getDescription());
-            //TODO: set the image of the item
-            imageView.setImage(null);//item.getImages().get(0));
             itemBox.getChildren().add(imageView);
             itemBox.getChildren().add(label);
             itemsViewList.getItems().add(itemBox);
@@ -52,7 +52,6 @@ public class MenuController implements Initializable {
         mainGridPane.add(itemsViewList,0,2);
         GridPane.setRowSpan(itemsViewList, GridPane.REMAINING);
         GridPane.setColumnSpan(itemsViewList, GridPane.REMAINING);
-        */
     }
     
     @FXML

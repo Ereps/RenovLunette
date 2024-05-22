@@ -1,30 +1,26 @@
 package renovlunette;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.net.http.HttpResponse.BodyHandler;
+import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.nio.charset.StandardCharsets;
+import java.sql.Blob;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Base64;
+import javafx.embed.swing.SwingFXUtils;
+
+
+import javax.imageio.ImageIO;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javafx.scene.image.Image;
-
-import org.json.JSONArray;
 public class DB {
     
     private URI uri;
@@ -38,9 +34,9 @@ public class DB {
 
     public void createItemsTable(){
         query("CREATE TABLE IF NOT EXISTS items (id INTEGER"+
-                                                ",image1 BLOB"+
-                                                ",image2 BLOB"+ 
-                                                ",image3 BLOB,"+ 
+                                                ",image1 VARCHAR(255)"+
+                                                ",image2 VARCHAR(255)"+ 
+                                                ",image3 VARCHAR(255),"+ 
                                                 "description VARCHAR(255),"+
                                                 "color VARCHAR(255) NOT NULL,"+
                                                 "size VARCHAR(255) NOT NULL,"+
@@ -84,8 +80,17 @@ public class DB {
         return response.body();
     }
 
-    public void saveItem(String description, String color, String size, String qualityState, String price, String contact, String rib) {
-        query("INSERT INTO items (description, color, size, qualityState, price, contact, rib) VALUES ('"+description+"', '"+color+"', '"+size+"', '"+qualityState+"', '"+price+"', '"+contact+"', '"+rib+"')");
+    public void saveItem(byte[] image1,byte[] image2,byte[] image3,String description, String color, String size, String qualityState, String price, String contact, String rib) {
+        query("INSERT INTO items (image1,image2,image3,description, color, size, qualityState, price, contact, rib) VALUES ('"+encodeImage(image1)+"','"+encodeImage(image2)+"','"+encodeImage(image3)+"','"+description+"', '"+color+"', '"+size+"', '"+qualityState+"', '"+price+"', '"+contact+"', '"+rib+"')");
+    }
+    private String encodeImage(byte[] image){
+        if(image == null){
+            return null;
+        }
+        return Base64.getEncoder().encodeToString(image);
+    }
+    private byte[] decodeImage(String image){
+        return Base64.getDecoder().decode(image);
     }
 
     //TODO faire un truc pour revenir en arriere avec des pages
@@ -103,30 +108,31 @@ public class DB {
             JSONArray row = rows.getJSONArray(i);
             int id = Integer.parseInt(getValueFromJson(row.getJSONObject(0)));
             //TODO utiliser les blob pour reprendre les images index 1 dans la db
-            ArrayList<Image> images = new ArrayList<>(); //TODO mettre les images
-            String description = getValueFromJson(row.getJSONObject(2));
-            String color = getValueFromJson(row.getJSONObject(3));
-            String size = getValueFromJson(row.getJSONObject(4));
-            String qualityState = getValueFromJson(row.getJSONObject(5));
-            double price = Double.parseDouble(getValueFromJson(row.getJSONObject(6)));
-            String contact = getValueFromJson(row.getJSONObject(7));
-            String rib = getValueFromJson(row.getJSONObject(8));
 
-            items.add(new Item(description, price, images, color, size, qualityState, contact, rib));
-            /*for (int j = 0; j < row.length(); j++) {
-                JSONObject item = row.getJSONObject(j);
-                System.out.println(item);
-                int id = 
-            }*/
+            ArrayList<Image> images = new ArrayList<>(); //TODO mettre les images get 1 à 3
+            System.err.println("image1 : "+getValueFromJson(row.getJSONObject(1)));
+            images.add(getImageFromByte(decodeImage(getValueFromJson(row.getJSONObject(1)))));
+            images.add(getImageFromByte(getValueFromJson(row.getJSONObject(2)).getBytes()));
+            images.add(getImageFromByte(getValueFromJson(row.getJSONObject(3)).getBytes()));
+            
+            String description = getValueFromJson(row.getJSONObject(4));
+            String color = getValueFromJson(row.getJSONObject(5));
+            String size = getValueFromJson(row.getJSONObject(6));
+            String qualityState = getValueFromJson(row.getJSONObject(7));
+            double price = Double.parseDouble(getValueFromJson(row.getJSONObject(8)));
+            String contact = getValueFromJson(row.getJSONObject(9));
+            String rib = getValueFromJson(row.getJSONObject(10));
 
-            //TODO changer null en les images
-            //items.add(new Item(item.getString("description"), item.getDouble("price"), null, item.getString("color"), item.getString("size"), item.getString("qualityState"), item.getString("contact"), item.getString("rib")));
+            items.add(new Item(id,description, price, images, color, size, qualityState, contact, rib));
         }
         return items;
     }
-
+    private Image getImageFromByte(byte[] image) {
+        InputStream is = new ByteArrayInputStream(image);
+        return new Image(is);
+    }
+                
     private String getValueFromJson(JSONObject item){
-        System.out.println(item.getString("value"));
         return item.getString("value");
     }
     public void resetOffset(){

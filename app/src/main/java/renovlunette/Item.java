@@ -5,16 +5,21 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Item {
-    private String description;
+    private int id;
+        private String description;
     private double price;
     private ArrayList<Image> images;
 
-    public Item(String description, double price, ArrayList<Image> images, String color, String size, String qualityState, String contact, String rib) {
+    public Item(int id ,String description, double price, ArrayList<Image> images, String color, String size, String qualityState, String contact, String rib) {
+        this.id = id;
         this.description = description;
         this.price = price;
         this.images = images;
     }
 
+    public int getId() {
+        return id;
+    }
     public String getDescription() {
         return description;
     }
