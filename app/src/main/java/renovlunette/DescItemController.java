@@ -45,7 +45,7 @@ public class DescItemController implements Initializable{
     @FXML
     Text priceText;
     @FXML
-    Text contactText;
+    Text contacText;
 
     @FXML
     Button returnButton;
@@ -76,7 +76,7 @@ public class DescItemController implements Initializable{
         sizeText.setText(item.getSize());
         qualityStateText.setText(item.getQualityState());
         priceText.setText(item.getPrice()+"");
-        contactText.setText(item.getContact());
+        contacText.setText(item.getContact());
         img1.setImage(item.getImages().get(0));
         if(item.getImages().get(1) == null){
             img2.setVisible(false);
