@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -33,9 +34,18 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        itemsViewList = new ListView<HBox>();
+        refresh();
         
+
+
+
+    }
+
+    public void refresh(){
+        itemsViewList = new ListView<HBox>();
+
         DB db = new DB();
+        db.resetOffset();
         items = db.getItems();
         System.out.println(items);
         for (Item item : items) {
@@ -77,11 +87,11 @@ public class MenuController implements Initializable {
             }
         });
 
+    // Add the itemsViewList to the parent container
+    mainGridPane.add(itemsViewList,0,2);
+    GridPane.setRowSpan(itemsViewList, GridPane.REMAINING);
+    GridPane.setColumnSpan(itemsViewList, GridPane.REMAINING);
 
-        // Add the itemsViewList to the parent container
-        mainGridPane.add(itemsViewList,0,2);
-        GridPane.setRowSpan(itemsViewList, GridPane.REMAINING);
-        GridPane.setColumnSpan(itemsViewList, GridPane.REMAINING);
     }
     
     @FXML
