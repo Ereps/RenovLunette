@@ -34,6 +34,9 @@ import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImage;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 
 public class SellController implements Initializable{
     @FXML
@@ -98,6 +101,10 @@ public class SellController implements Initializable{
     }
     @FXML
     public void validate(ActionEvent actionEvent) throws Exception{
+        if (checkFields()==true) {
+            showErrorAlert("Champ non rempli");
+            return;
+        };
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
         Pane root = (Pane) loader.load();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
@@ -174,4 +181,47 @@ public class SellController implements Initializable{
             return byteArray;
         }
     
+
+    //fonction pour déterminer si un champ est vide
+    @FXML
+    public boolean checkFields() {
+        boolean isTextFieldEmpty = priceTextField.getText().isEmpty() || contactTextField.getText().isEmpty() || ribTextField.getText().isEmpty();
+        boolean isChoiceBoxeUnselected = colorCB.getValue() == null || sizeCB.getValue() == null || qualityStateCB.getValue() == null;
+        return (isChoiceBoxeUnselected || isTextFieldEmpty);
+    }
+
+    // Méthode pour afficher une alerte d'erreur
+    private void showErrorAlert(String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    //fonction pour lock les champs de la fenêtre
+    @FXML
+    public void lockAll() {
+        colorCB.setDisable(true);
+        sizeCB.setDisable(true);
+        qualityStateCB.setDisable(true);
+        priceTextField.setDisable(true);
+        contactTextField.setDisable(true);
+        ribTextField.setDisable(true);
+        returnButton.setDisable(true);
+        validationButton.setDisable(true);
+    }
+
+    //fonction pour delock les champs de la fenêtre
+    @FXML
+    public void unlockAll() {
+        colorCB.setDisable(false);
+        sizeCB.setDisable(false);
+        qualityStateCB.setDisable(false);
+        priceTextField.setDisable(false);
+        contactTextField.setDisable(false);
+        ribTextField.setDisable(false);
+        returnButton.setDisable(false);
+        validationButton.setDisable(false);
+    }
 }
