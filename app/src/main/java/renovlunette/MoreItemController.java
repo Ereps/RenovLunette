@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,9 +21,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 
 
-public class MenuController implements Initializable {
+public class MoreItemController implements Initializable {
     @FXML
-    private Button sellButton;
+    private Button returnButton;
 
     private ArrayList<Item> items;
     @FXML
@@ -43,9 +42,7 @@ public class MenuController implements Initializable {
 
     public void refresh(){
         itemsViewList = new ListView<HBox>();
-
         DB db = new DB();
-        db.resetOffset();
         items = db.getItems();
         System.out.println(items);
         for (Item item : items) {
@@ -95,8 +92,8 @@ public class MenuController implements Initializable {
     }
     
     @FXML
-    public void goToSell(ActionEvent actionEvent) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sell.fxml"));
+    public void goToMenu(ActionEvent actionEvent) throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
         Pane root = (Pane) loader.load();
         Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
         scene.setRoot(root);
@@ -104,10 +101,6 @@ public class MenuController implements Initializable {
     }
     @FXML
     public void goToMore(ActionEvent actionEvent) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/moreItem.fxml"));
-        Pane root = (Pane) loader.load();
-        Scene scene = (Scene) ((Node) actionEvent.getSource()).getScene();
-        scene.setRoot(root);
-
+        refresh();
     }
 }
