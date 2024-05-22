@@ -185,9 +185,10 @@ public class SellController implements Initializable{
     //fonction pour déterminer si un champ est vide
     @FXML
     public boolean checkFields() {
+        boolean isImageEmpty = img1.getImage() == null;
         boolean isTextFieldEmpty = priceTextField.getText().isEmpty() || contactTextField.getText().isEmpty() || ribTextField.getText().isEmpty();
         boolean isChoiceBoxeUnselected = colorCB.getValue() == null || sizeCB.getValue() == null || qualityStateCB.getValue() == null;
-        return (isChoiceBoxeUnselected || isTextFieldEmpty);
+        return (isImageEmpty || isChoiceBoxeUnselected || isTextFieldEmpty);
     }
 
     // Méthode pour afficher une alerte d'erreur
