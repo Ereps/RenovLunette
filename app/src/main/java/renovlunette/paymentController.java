@@ -60,7 +60,7 @@ public class paymentController {
     //on returnButton / okButton
     @FXML
     public void goToMenu(ActionEvent actionEvent) throws Exception{
-        
+        mainGridPane.setDisable(false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
 
         //REFAIRE L'initialisation de la page

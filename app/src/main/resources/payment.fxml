@@ -47,7 +47,7 @@
       </GridPane>
    </top>
    <center>
-      <Pane fx:id="confirmationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" visible="false" BorderPane.alignment="CENTER">
+      <Pane fx:id="confirmationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-background-color: white;" visible="false" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="300.0" />
          </BorderPane.margin>
@@ -59,7 +59,7 @@
       </Pane>
    </center>
    <bottom>
-      <Pane fx:id="effectuePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" visible="false" BorderPane.alignment="CENTER">
+      <Pane fx:id="effectuePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-background-color: white;" visible="false" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="300.0" />
          </BorderPane.margin>
